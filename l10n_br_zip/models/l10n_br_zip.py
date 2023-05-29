@@ -16,7 +16,7 @@ except ImportError:
 _logger = logging.getLogger(__name__)
 
 try:
-    from pycep_correios import WebService, get_address_from_cep
+    from brazilcep import WebService, get_address_from_cep
 except ImportError:
     _logger.warning("Library PyCEP-Correios not installed !")
 
@@ -134,6 +134,7 @@ class L10nBrZip(models.Model):
             cep = get_address_from_cep(
                 zip_str, webservice=cep_ws_providers.get(cep_ws_provide)
             )
+
         except Exception as e:
             raise UserError(_("Error in PyCEP-Correios: ") + str(e)) from e
 
@@ -149,15 +150,15 @@ class L10nBrZip(models.Model):
 
             # search city with name and state
             city = self.env["res.city"].search(
-                [("name", "ilike", cep.get("cidade")), ("state_id.id", "=", state.id)],
+                [("name", "ilike", cep.get("city")), ("state_id.id", "=", state.id)],
                 limit=1,
             )
 
             values = {
                 "zip_code": zip_str,
-                "street_name": cep.get("logradouro"),
-                "zip_complement": cep.get("complemento"),
-                "district": cep.get("bairro"),
+                "street_name": cep.get("street"),
+                "zip_complement": cep.get("complement"),
+                "district": cep.get("district"),
                 "city_id": city.id or False,
                 "state_id": state.id or False,
                 "country_id": country.id or False,

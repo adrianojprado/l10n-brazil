@@ -13,3 +13,13 @@ pyyaml
 satcomum
 unidecode
 workalendar
+xmldiff
+pysftp
+cryptography
+endesive
+py3o.formats
+py3o.template
+pdf2image
+pyzbar
+ofxparse
+signxml==3.0.2
