@@ -81,11 +81,6 @@ msgid "Ano do Modelo"
 msgstr "Ano do Modelo"
 
 #. module: l10n_br_delivery
-#: model:res.partner,nfe40_xPais:l10n_br_delivery.test_carrier
-msgid "Brazil"
-msgstr "Brasil"
-
-#. module: l10n_br_delivery
 #: model:ir.model.fields.selection,name:l10n_br_delivery.selection__l10n_br_delivery_carrier_vehicle__type__bau
 #, fuzzy
 msgid "Caminhão Baú"
@@ -174,16 +169,22 @@ msgstr ""
 "Preencha este campo se você planeja faturar a entrega baseada no picking."
 
 #. module: l10n_br_delivery
+#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_bank_statement_line__fiscal_incoterm_id
+#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_bank_statement_line__incoterm_id
+#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_move__fiscal_incoterm_id
+#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_move__incoterm_id
+#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_payment__fiscal_incoterm_id
+#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_payment__incoterm_id
+#: model:ir.model.fields,field_description:l10n_br_delivery.field_l10n_br_fiscal_document__fiscal_incoterm_id
+#: model:ir.model.fields,field_description:l10n_br_delivery.field_l10n_br_fiscal_document__incoterm_id
+msgid "Fiscal Inconterm"
+msgstr ""
+
+#. module: l10n_br_delivery
 #: model:ir.model.fields,field_description:l10n_br_delivery.field_account_incoterms__freight_responsibility
 #, fuzzy
 msgid "Frete por Conta"
 msgstr "Frete por Conta"
-
-#. module: l10n_br_delivery
-#: model:res.partner,nfe40_xMun:l10n_br_delivery.test_carrier
-#, fuzzy
-msgid "Guarulhos"
-msgstr "Guarulhos"
 
 #. module: l10n_br_delivery
 #: model:ir.model.fields,field_description:l10n_br_delivery.field_account_incoterms__id
@@ -198,16 +199,8 @@ msgid "ID"
 msgstr "ID"
 
 #. module: l10n_br_delivery
-#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_bank_statement_line__fiscal_incoterm_id
-#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_bank_statement_line__incoterm_id
-#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_move__fiscal_incoterm_id
-#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_move__incoterm_id
-#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_payment__fiscal_incoterm_id
-#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_payment__incoterm_id
 #: model:ir.model.fields,field_description:l10n_br_delivery.field_contract_contract__fiscal_incoterm_id
 #: model:ir.model.fields,field_description:l10n_br_delivery.field_contract_contract__incoterm_id
-#: model:ir.model.fields,field_description:l10n_br_delivery.field_l10n_br_fiscal_document__fiscal_incoterm_id
-#: model:ir.model.fields,field_description:l10n_br_delivery.field_l10n_br_fiscal_document__incoterm_id
 #: model:ir.model.fields,field_description:l10n_br_delivery.field_l10n_br_fiscal_document_mixin__fiscal_incoterm_id
 #: model:ir.model.fields,field_description:l10n_br_delivery.field_l10n_br_fiscal_document_mixin__incoterm_id
 #: model:ir.model.fields,field_description:l10n_br_delivery.field_pos_order__fiscal_incoterm_id
@@ -361,6 +354,13 @@ msgstr "Veículos"
 #, fuzzy
 msgid "[('supplier', '=', True)]"
 msgstr "[('supplier', '=', True)]"
+
+#~ msgid "Brazil"
+#~ msgstr "Brasil"
+
+#, fuzzy
+#~ msgid "Guarulhos"
+#~ msgstr "Guarulhos"
 
 #~ msgid "Fiscal Document"
 #~ msgstr "Documento Fiscal"

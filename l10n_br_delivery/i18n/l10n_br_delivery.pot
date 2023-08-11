@@ -74,11 +74,6 @@ msgid "Ano do Modelo"
 msgstr ""
 
 #. module: l10n_br_delivery
-#: model:res.partner,nfe40_xPais:l10n_br_delivery.test_carrier
-msgid "Brazil"
-msgstr ""
-
-#. module: l10n_br_delivery
 #: model:ir.model.fields.selection,name:l10n_br_delivery.selection__l10n_br_delivery_carrier_vehicle__type__bau
 msgid "Caminhão Baú"
 msgstr ""
@@ -165,13 +160,20 @@ msgid "Fill this field if you plan to invoice the shipping based on picking."
 msgstr ""
 
 #. module: l10n_br_delivery
-#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_incoterms__freight_responsibility
-msgid "Frete por Conta"
+#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_bank_statement_line__fiscal_incoterm_id
+#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_bank_statement_line__incoterm_id
+#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_move__fiscal_incoterm_id
+#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_move__incoterm_id
+#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_payment__fiscal_incoterm_id
+#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_payment__incoterm_id
+#: model:ir.model.fields,field_description:l10n_br_delivery.field_l10n_br_fiscal_document__fiscal_incoterm_id
+#: model:ir.model.fields,field_description:l10n_br_delivery.field_l10n_br_fiscal_document__incoterm_id
+msgid "Fiscal Inconterm"
 msgstr ""
 
 #. module: l10n_br_delivery
-#: model:res.partner,nfe40_xMun:l10n_br_delivery.test_carrier
-msgid "Guarulhos"
+#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_incoterms__freight_responsibility
+msgid "Frete por Conta"
 msgstr ""
 
 #. module: l10n_br_delivery
@@ -186,16 +188,8 @@ msgid "ID"
 msgstr ""
 
 #. module: l10n_br_delivery
-#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_bank_statement_line__fiscal_incoterm_id
-#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_bank_statement_line__incoterm_id
-#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_move__fiscal_incoterm_id
-#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_move__incoterm_id
-#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_payment__fiscal_incoterm_id
-#: model:ir.model.fields,field_description:l10n_br_delivery.field_account_payment__incoterm_id
 #: model:ir.model.fields,field_description:l10n_br_delivery.field_contract_contract__fiscal_incoterm_id
 #: model:ir.model.fields,field_description:l10n_br_delivery.field_contract_contract__incoterm_id
-#: model:ir.model.fields,field_description:l10n_br_delivery.field_l10n_br_fiscal_document__fiscal_incoterm_id
-#: model:ir.model.fields,field_description:l10n_br_delivery.field_l10n_br_fiscal_document__incoterm_id
 #: model:ir.model.fields,field_description:l10n_br_delivery.field_l10n_br_fiscal_document_mixin__fiscal_incoterm_id
 #: model:ir.model.fields,field_description:l10n_br_delivery.field_l10n_br_fiscal_document_mixin__incoterm_id
 #: model:ir.model.fields,field_description:l10n_br_delivery.field_pos_order__fiscal_incoterm_id
