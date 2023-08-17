@@ -101,6 +101,7 @@ class ResPartner(spec_models.SpecModel):
     nfe40_choice6 = fields.Selection(
         selection=[("nfe40_CNPJ", "CNPJ"), ("nfe40_CPF", "CPF")],
         string="CNPJ/CPF do Emitente",
+        compute="_compute_nfe_data",
     )
 
     # nfe.40.tendereco
@@ -143,6 +144,7 @@ class ResPartner(spec_models.SpecModel):
     nfe40_choice2 = fields.Selection(
         selection=[("nfe40_CNPJ", "CNPJ"), ("nfe40_CPF", "CPF")],
         string="CNPJ/CPF do Parceiro",
+        compute="_compute_nfe_data",
     )
 
     nfe40_choice7 = fields.Selection(
@@ -160,6 +162,7 @@ class ResPartner(spec_models.SpecModel):
     nfe40_choice8 = fields.Selection(
         selection=[("nfe40_CNPJ", "CNPJ"), ("nfe40_CPF", "CPF")],
         string="CNPJ/CPF do Parceiro Autorizado",
+        compute="_compute_nfe_data",
     )
 
     # nfe.40.transporta
@@ -169,6 +172,7 @@ class ResPartner(spec_models.SpecModel):
             ("nfe40_CPF", "CPF"),
         ],
         string="CNPJ or CPF",
+        compute="_compute_nfe_data",
     )
 
     def _compute_nfe40_xEnder(self):
@@ -207,6 +211,14 @@ class ResPartner(spec_models.SpecModel):
                     rec.nfe40_choice19 = "nfe40_CPF"
                     rec.nfe40_CPF = cnpj_cpf
                     rec.nfe40_CNPJ = None
+            else:
+                rec.nfe40_choice2 = False
+                rec.nfe40_choice6 = False
+                rec.nfe40_choice7 = False
+                rec.nfe40_choice8 = False
+                rec.nfe40_choice19 = False
+                rec.nfe40_CNPJ = ""
+                rec.nfe40_CPF = ""
 
             if rec.inscr_est:
                 rec.nfe40_IE = punctuation_rm(rec.inscr_est)
