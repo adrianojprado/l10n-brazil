@@ -18,7 +18,7 @@ _logger = logging.getLogger(__name__)
 try:
     from brazilcep import WebService, get_address_from_cep
 except ImportError:
-    _logger.warning("Library PyCEP-Correios not installed !")
+    _logger.warning("Python Library brazilcep not installed !")
 
 
 class L10nBrZip(models.Model):
@@ -136,7 +136,7 @@ class L10nBrZip(models.Model):
             )
 
         except Exception as e:
-            raise UserError(_("Error in PyCEP-Correios: ") + str(e)) from e
+            raise UserError(_("Error in BrazilCEP: ") + str(e)) from e
 
         values = {}
         if cep and any(cep.values()):
