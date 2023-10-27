@@ -45,7 +45,6 @@ def filter_paulistana(record):
 
 
 class Document(models.Model):
-
     _inherit = "l10n_br_fiscal.document"
 
     def convert_type_nfselib(self, class_object, object_filed, value):
@@ -68,7 +67,7 @@ class Document(models.Model):
             return value
 
     def _serialize(self, edocs):
-        edocs = super(Document, self)._serialize(edocs)
+        edocs = super()._serialize(edocs)
         for record in self.filtered(filter_oca_nfse).filtered(filter_paulistana):
             edocs.append(record.serialize_nfse_paulistana())
         return edocs
@@ -325,7 +324,7 @@ class Document(models.Model):
         return dict_type_rps[rps_type]
 
     def _eletronic_document_send(self):
-        super(Document, self)._eletronic_document_send()
+        super()._eletronic_document_send()
         for record in self.filtered(filter_oca_nfse).filtered(filter_paulistana):
             processador = record._processador_erpbrasil_nfse()
 
@@ -443,5 +442,5 @@ class Document(models.Model):
             return status
 
     def _exec_before_SITUACAO_EDOC_CANCELADA(self, old_state, new_state):
-        super(Document, self)._exec_before_SITUACAO_EDOC_CANCELADA(old_state, new_state)
+        super()._exec_before_SITUACAO_EDOC_CANCELADA(old_state, new_state)
         return self.cancel_document_paulistana()

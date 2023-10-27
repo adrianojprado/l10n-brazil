@@ -4,7 +4,7 @@
 
 {
     "name": "L10n Br Account Payment BRCobranca",
-    "version": "14.0.4.2.0",
+    "version": "14.0.4.3.1",
     "license": "AGPL-3",
     "author": "Akretion, " "Odoo Community Association (OCA)",
     "maintainers": ["rvalyi", "mbcosta"],
@@ -26,4 +26,9 @@
         "demo/account_move_demo.xml",
         "demo/account_payment_mode.xml",
     ],
+    "external_dependencies": {
+        "python": [
+            "erpbrasil.base>=2.3.0",
+        ]
+    },
 }
