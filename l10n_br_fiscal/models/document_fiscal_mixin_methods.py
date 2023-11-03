@@ -31,7 +31,7 @@ class FiscalDocumentMixinMethods(models.AbstractModel):
     def _get_product_amount_lines(self):
         """Get object lines instaces used to compute fields"""
         fiscal_line_ids = self._get_amount_lines()
-        return fiscal_line_ids.filtered(lambda l: l.product_id.type != "service")
+        return fiscal_line_ids.filtered(lambda line: line.product_id.type != "service")
 
     @api.model
     def _get_amount_fields(self):
@@ -132,9 +132,10 @@ class FiscalDocumentMixinMethods(models.AbstractModel):
                         record._get_product_amount_lines().mapped("price_gross")
                     )
                     for line in record._get_product_amount_lines()[:-1]:
-                        line.freight_value = amount_freight_value * (
-                            line.price_gross / amount_total
-                        )
+                        if line.price_gross and amount_total:
+                            line.freight_value = amount_freight_value * (
+                                line.price_gross / amount_total
+                            )
                     record._get_product_amount_lines()[
                         -1
                     ].freight_value = amount_freight_value - sum(
@@ -179,9 +180,10 @@ class FiscalDocumentMixinMethods(models.AbstractModel):
                         record._get_product_amount_lines().mapped("price_gross")
                     )
                     for line in record._get_product_amount_lines()[:-1]:
-                        line.insurance_value = amount_insurance_value * (
-                            line.price_gross / amount_total
-                        )
+                        if line.price_gross and amount_total:
+                            line.insurance_value = amount_insurance_value * (
+                                line.price_gross / amount_total
+                            )
                     record._get_product_amount_lines()[
                         -1
                     ].insurance_value = amount_insurance_value - sum(
@@ -226,9 +228,10 @@ class FiscalDocumentMixinMethods(models.AbstractModel):
                         record._get_product_amount_lines().mapped("price_gross")
                     )
                     for line in record._get_product_amount_lines()[:-1]:
-                        line.other_value = amount_other_value * (
-                            line.price_gross / amount_total
-                        )
+                        if line.price_gross and amount_total:
+                            line.other_value = amount_other_value * (
+                                line.price_gross / amount_total
+                            )
                     record._get_product_amount_lines()[
                         -1
                     ].other_value = amount_other_value - sum(
