@@ -11,7 +11,7 @@
     "maintainers": ["rvalyi", "renatonlima"],
     "website": "https://github.com/OCA/l10n-brazil",
     "development_status": "Beta",
-    "version": "14.0.13.8.0",
+    "version": "14.0.13.9.1",
     "depends": [
         "l10n_br_fiscal",
         "l10n_br_fiscal_certificate",
@@ -23,7 +23,6 @@
         # Data
         "data/ir_config_parameter.xml",
         # Security
-        "security/ir_model_access.xml",
         "security/nfe_security.xml",
         "security/ir.model.access.csv",
         # Views
