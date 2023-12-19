@@ -699,7 +699,24 @@ class NFe(spec_models.StackedModel):
         return super()._build_attr(node, fields, vals, path, attr)
 
     def _build_many2one(self, comodel, vals, new_value, key, value, path):
-        if key == "nfe40_emit" and self.env.context.get("edoc_type") == "in":
+        if key == "nfe40_entrega" and self.env.context.get("edoc_type") == "in":
+            enderEntreg_value = self.env["res.partner"].build_attrs(value, path=path)
+            new_value.update(enderEntreg_value)
+            parent_domain = [("nfe40_CNPJ", "=", new_value.get("nfe40_CNPJ"))]
+            parent_partner_match = self.env["res.partner"].search(
+                parent_domain, limit=1
+            )
+            new_vals = {
+                "nfe40_CNPJ": False,
+                "type": "delivery",
+                "parent_id": parent_partner_match.id,
+                "company_type": "person",
+            }
+            new_value.update(new_vals)
+            super()._build_many2one(
+                self.env["res.partner"], vals, new_value, key, value, path
+            )
+        elif key == "nfe40_emit" and self.env.context.get("edoc_type") == "in":
             enderEmit_value = self.env["res.partner"].build_attrs(
                 value.enderEmit, path=path
             )
@@ -717,27 +734,39 @@ class NFe(spec_models.StackedModel):
             super()._build_many2one(
                 self.env["res.partner"], vals, new_value, "partner_id", value, path
             )
-        elif key == "nfe40_entrega" and self.env.context.get("edoc_type") == "in":
-            enderEntreg_value = self.env["res.partner"].build_attrs(value, path=path)
-            new_value.update(enderEntreg_value)
-            parent_domain = [("nfe40_CNPJ", "=", new_value.get("nfe40_CNPJ"))]
-            parent_partner_match = self.env["res.partner"].search(
-                parent_domain, limit=1
+        elif key == "nfe40_dest" and self.env.context.get("edoc_type") == "out":
+            enderDest_value = self.env["res.partner"].build_attrs(
+                value.enderDest, path=path
             )
-            new_vals = {
-                "nfe40_CNPJ": False,
-                "type": "delivery",
-                "parent_id": parent_partner_match.id,
-                "company_type": "person",
-            }
-            new_value.update(new_vals)
+            new_value.update(enderDest_value)
+            company_cnpj = self.env.user.company_id.cnpj_cpf.translate(
+                str.maketrans("", "", string.punctuation)
+            )
+            dest_cnpj = new_value.get("nfe40_CNPJ").translate(
+                str.maketrans("", "", string.punctuation)
+            )
+            if company_cnpj != dest_cnpj:
+                vals["issuer"] = "partner"
+            new_value["is_company"] = True
+            new_value["cnpj_cpf"] = dest_cnpj
             super()._build_many2one(
-                self.env["res.partner"], vals, new_value, key, value, path
+                self.env["res.partner"], vals, new_value, "partner_id", value, path
             )
-        elif self.env.context.get("edoc_type") == "in" and key in [
-            "nfe40_dest",
-            "nfe40_enderDest",
-        ]:
+        elif (
+            self.env.context.get("edoc_type") == "in"
+            and key
+            in [
+                "nfe40_dest",
+                "nfe40_enderDest",
+            ]
+        ) or (
+            self.env.context.get("edoc_type") == "out"
+            and key
+            in [
+                "nfe40_emit",
+                "nfe40_enderEmit",
+            ]
+        ):
             # this would be the emit/company data, but we won't update it on
             # NFe import so just do nothing
             return
@@ -771,6 +800,28 @@ class NFe(spec_models.StackedModel):
                                 f"line field (nfe40_cProd) should be filled."
                             )
                         )
+
+    @api.constrains("document_date", "document_key", "state_edoc")
+    def _check_document_date_key(self):
+        for rec in self:
+            if rec.document_key:
+                key_date_str = rec.document_key[2:6]
+                key_date = datetime.strptime(key_date_str, "%y%m")
+
+                document_date = fields.Datetime.from_string(rec.document_date)
+                if (
+                    rec.document_type in ["55", "65"]
+                    and rec.state_edoc in ["a_enviar", "autorizada"]
+                    and (
+                        key_date.year != document_date.year
+                        or key_date.month != document_date.month
+                    )
+                ):
+                    raise ValidationError(
+                        _(
+                            "The document date does not match the date in the document key."
+                        )
+                    )
 
     def _document_number(self):
         # TODO: Criar campos no fiscal para codigo aleatorio e digito verificador,
