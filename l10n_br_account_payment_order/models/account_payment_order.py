@@ -53,14 +53,11 @@ class AccountPaymentOrder(models.Model):
         help="Campo G029 do CNAB",
     )
 
-    code_convetion = fields.Char(
-        related="payment_mode_id.code_convetion",
-        help="Campo G007 do CNAB",
+    cnab_company_bank_code = fields.Char(
+        related="payment_mode_id.cnab_company_bank_code",
     )
 
-    code_convenio_lider = fields.Char(
-        string="Convênio Líder", related="payment_mode_id.code_convenio_lider"
-    )
+    convention_code = fields.Char(related="payment_mode_id.convention_code")
 
     indicative_form_payment = fields.Selection(
         selection=INDICATIVO_FORMA_PAGAMENTO,
@@ -224,3 +221,21 @@ class AccountPaymentOrder(models.Model):
             return (False, False)
         else:
             return super().generate_payment_file()
+
+    def get_file_name(self, cnab_type):
+        context_today = fields.Date.context_today(self)
+        if cnab_type == "240":
+            return "CB%s%s.REM" % (
+                context_today.strftime("%d%m"),
+                str(self.file_number),
+            )
+        elif cnab_type == "400":
+            return "CB%s%02d.REM" % (
+                context_today.strftime("%d%m"),
+                self.file_number or 1,
+            )
+        elif cnab_type == "500":
+            return "PG%s%s.REM" % (
+                context_today.strftime("%d%m"),
+                str(self.file_number),
+            )

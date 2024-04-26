@@ -1,7 +1,7 @@
 # Copyright (C) 2009  Renato Lima - Akretion
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -23,6 +23,17 @@ class StockInvoiceOnshipping(models.TransientModel):
         else:
             # Caso Brasileiro
             return True
+
+    @api.onchange("group")
+    def onchange_group(self):
+        super().onchange_group()
+        pickings = self._load_pickings()
+        has_fiscal_operation = False
+        if pickings.mapped("fiscal_operation_id"):
+            has_fiscal_operation = True
+        self.has_fiscal_operation = has_fiscal_operation
+
+    has_fiscal_operation = fields.Boolean()
 
     fiscal_operation_journal = fields.Boolean(
         string="Account Jornal from Fiscal Operation",
@@ -134,22 +145,16 @@ class StockInvoiceOnshipping(models.TransientModel):
 
         values.update(fiscal_values)
 
-        # Chamar este método garante que os tax_ids sejam calculados corretamente
-        values = self._simulate_onchange_fiscal_tax_ids(values)
+        # Apesar do metodo _get_taxes retornar os Impostos corretamente
+        # ao rodar o _simulate_line_onchange
+        # https://github.com/OCA/account-invoicing/blob/14.0/
+        # stock_picking_invoicing/wizards/stock_invoice_onshipping.py#L415
+        # o valor acaba sendo alterado
+        # TODO: Analisar se isso é um problema da Localização e se existe
+        #  alguma forma de resolver, por enquanto está sendo informado
+        #  novamente aqui
+        values["tax_ids"] = [(6, 0, move.tax_ids.ids)]
 
-        return values
-
-    def _simulate_onchange_fiscal_tax_ids(self, values):
-        """
-        Simulate onchange fiscal tax ids
-        :param values: dict
-        :return: dict
-        """
-        line = self.env["account.move.line"].new(values.copy())
-        line._onchange_fiscal_tax_ids()
-        new_values = line._convert_to_write(line._cache)
-        # Ensure basic values are not updated
-        values.update(new_values)
         return values
 
     def _get_move_key(self, move):
