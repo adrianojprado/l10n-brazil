@@ -4,16 +4,16 @@
 
 {
     "name": "NF-e",
-    "summary": "Brazilian Eletronic Invoice NF-e",
+    "summary": "Eletronic Invoicing for Brazil / NF-e",
     "category": "Localisation",
     "license": "AGPL-3",
     "author": "Akretion," "KMEE," "Odoo Community Association (OCA)",
     "maintainers": ["rvalyi", "renatonlima"],
     "website": "https://github.com/OCA/l10n-brazil",
     "development_status": "Beta",
-    "version": "14.0.14.3.1",
+    "version": "14.0.17.0.1",
     "depends": [
-        "l10n_br_fiscal",
+        "l10n_br_fiscal_edi",
         "l10n_br_fiscal_certificate",
         "l10n_br_nfe_spec",
         "spec_driven_model",
@@ -35,6 +35,7 @@
         # Report
         "report/reports.xml",
         "report/danfe_nfce.xml",
+        "report/danfe_report.xml",
         # Wizards
         "wizards/import_document.xml",
         # Actions,
@@ -52,12 +53,13 @@
     "auto_install": False,
     "external_dependencies": {
         "python": [
-            "nfelib>=2.0.0",
+            "nfelib<=2.0.7",
             "erpbrasil.assinatura>=1.7.0",
             "erpbrasil.transmissao>=1.1.0",
             "erpbrasil.edoc>=2.5.2",
             "erpbrasil.edoc.pdf",
             "erpbrasil.base>=2.3.0",
+            "brazilfiscalreport",
         ],
     },
 }

@@ -12,6 +12,7 @@ from requests import Session
 from odoo import fields, models
 
 from odoo.addons.l10n_br_fiscal.constants.fiscal import (
+    DOCUMENT_ISSUER_COMPANY,
     EVENT_ENV_HML,
     EVENT_ENV_PROD,
     MODELO_FISCAL_NFSE,
@@ -267,7 +268,7 @@ class Document(models.Model):
             "codigo_obra": self.civil_construction_code or "",
             "art": self.civil_construction_art or "",
             "carga_tributaria": self.amount_tax,
-            "total_recebido": self.amount_total,
+            "total_recebido": self.amount_price_gross,
             "carga_tributaria_estimada": self.amount_estimate_tax,
         }
 
@@ -289,3 +290,20 @@ class Document(models.Model):
             return str(value)
         else:
             return value
+
+    def _exec_after_SITUACAO_EDOC_AUTORIZADA(self, old_state, new_state):
+        self.ensure_one()
+        if (
+            self.document_type_id.code in [MODELO_FISCAL_NFSE]
+            and self.issuer == DOCUMENT_ISSUER_COMPANY
+        ):
+            try:
+                self.make_pdf()
+            except Exception as e:
+                # Não devemos interromper o fluxo
+                # E dar rollback em um documento
+                # autorizado, podendo perder dados.
+                # Se der problema que apareça quando
+                # o usuário clicar no gerar PDF novamente.
+                _logger.error("DANFSE Error \n {}".format(e))
+        super()._exec_after_SITUACAO_EDOC_AUTORIZADA(old_state, new_state)

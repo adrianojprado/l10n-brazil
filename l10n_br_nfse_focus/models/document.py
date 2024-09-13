@@ -21,7 +21,7 @@ from odoo.addons.l10n_br_fiscal.constants.fiscal import (
     SITUACAO_EDOC_ENVIADA,
     SITUACAO_EDOC_REJEITADA,
 )
-from odoo.addons.l10n_br_fiscal.models.document import Document as FiscalDocument
+from odoo.addons.l10n_br_fiscal_edi.models.document import Document as FiscalDocument
 from odoo.addons.l10n_br_nfse.models.document import filter_processador_edoc_nfse
 
 NFSE_URL = {
@@ -354,7 +354,7 @@ class Document(models.Model):
         Returns:
             A string indicating the current status of the document.
         """
-        result = super(FiscalDocument, self)._document_status()
+        result = super()._document_status()
         for record in self.filtered(filter_processador_edoc_nfse).filtered(
             filter_focusnfe
         ):
@@ -387,8 +387,16 @@ class Document(models.Model):
                             timeout=TIMEOUT,
                         ).content.decode("utf-8")
                         pdf_content = (
-                            requests.get(json["url"], timeout=TIMEOUT).content
-                            or requests.get(json["url_danfse"], timeout=TIMEOUT).content
+                            requests.get(
+                                json["url"],
+                                timeout=TIMEOUT,
+                                verify=record.company_id.nfse_ssl_verify,
+                            ).content
+                            or requests.get(
+                                json["url_danfse"],
+                                timeout=TIMEOUT,
+                                verify=record.company_id.nfse_ssl_verify,
+                            ).content
                         )
 
                         record.make_focus_nfse_pdf(pdf_content)
@@ -495,9 +503,15 @@ class Document(models.Model):
                     )
                     status_json = status_rps.json()
                     pdf_content = (
-                        requests.get(status_json["url"], timeout=TIMEOUT).content
+                        requests.get(
+                            status_json["url"],
+                            timeout=TIMEOUT,
+                            verify=record.company_id.nfse_ssl_verify,
+                        ).content
                         or requests.get(
-                            status_json["url_danfse"], timeout=TIMEOUT
+                            status_json["url_danfse"],
+                            timeout=TIMEOUT,
+                            verify=record.company_id.nfse_ssl_verify,
                         ).content
                     )
                     record.make_focus_nfse_pdf(pdf_content)

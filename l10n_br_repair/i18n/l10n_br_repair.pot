@@ -94,9 +94,6 @@ msgid "Amount Financial"
 msgstr ""
 
 #. module: l10n_br_repair
-#: model:ir.model.fields,field_description:l10n_br_repair.field_l10n_br_repair_fiscal_line_mixin__financial_total_gross
-#: model:ir.model.fields,field_description:l10n_br_repair.field_repair_fee__financial_total_gross
-#: model:ir.model.fields,field_description:l10n_br_repair.field_repair_line__financial_total_gross
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_order__amount_financial_total_gross
 msgid "Amount Financial Gross"
 msgstr ""
@@ -156,9 +153,6 @@ msgid "Amount Untaxed"
 msgstr ""
 
 #. module: l10n_br_repair
-#: model:ir.model.fields,help:l10n_br_repair.field_l10n_br_repair_fiscal_line_mixin__price_gross
-#: model:ir.model.fields,help:l10n_br_repair.field_repair_fee__price_gross
-#: model:ir.model.fields,help:l10n_br_repair.field_repair_line__price_gross
 #: model:ir.model.fields,help:l10n_br_repair.field_repair_order__amount_price_gross
 msgid "Amount without discount."
 msgstr ""
@@ -597,6 +591,21 @@ msgid "Display Name"
 msgstr ""
 
 #. module: l10n_br_repair
+#: model:ir.model.fields,field_description:l10n_br_repair.field_repair_order__document_number
+msgid "Document Number"
+msgstr ""
+
+#. module: l10n_br_repair
+#: model:ir.model.fields,field_description:l10n_br_repair.field_repair_order__document_serie_id
+msgid "Document Serie"
+msgstr ""
+
+#. module: l10n_br_repair
+#: model:ir.model.fields,field_description:l10n_br_repair.field_repair_order__document_type_id
+msgid "Document Type"
+msgstr ""
+
+#. module: l10n_br_repair
 #: model:ir.model.fields,field_description:l10n_br_repair.field_l10n_br_repair_fiscal_line_mixin__estimate_tax
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_fee__estimate_tax
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_line__estimate_tax
@@ -643,6 +652,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_line__financial_discount_value
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_order__amount_financial_discount_value
 msgid "Financial Discount Value"
+msgstr ""
+
+#. module: l10n_br_repair
+#: model:ir.model.fields,field_description:l10n_br_repair.field_l10n_br_repair_fiscal_line_mixin__financial_total_gross
+#: model:ir.model.fields,field_description:l10n_br_repair.field_repair_fee__financial_total_gross
+#: model:ir.model.fields,field_description:l10n_br_repair.field_repair_line__financial_total_gross
+msgid "Financial Gross Amount"
 msgstr ""
 
 #. module: l10n_br_repair
@@ -1424,6 +1440,11 @@ msgid "Invoices"
 msgstr ""
 
 #. module: l10n_br_repair
+#: model:ir.model.fields,field_description:l10n_br_repair.field_repair_order__document_key
+msgid "Key"
+msgstr ""
+
+#. module: l10n_br_repair
 #: model:ir.model.fields,field_description:l10n_br_repair.field_l10n_br_repair_fiscal_line_mixin____last_update
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_fee____last_update
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_line____last_update
@@ -1769,6 +1790,11 @@ msgid "Repair Order"
 msgstr ""
 
 #. module: l10n_br_repair
+#: model:ir.model.fields,field_description:l10n_br_repair.field_repair_order__document_serie
+msgid "Serie Number"
+msgstr ""
+
+#. module: l10n_br_repair
 #: model:ir.model.fields,field_description:l10n_br_repair.field_l10n_br_repair_fiscal_line_mixin__service_type_id
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_fee__service_type_id
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_line__service_type_id
@@ -1986,6 +2012,22 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_line__price_total
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_order__amount_total
 msgid "Total"
+msgstr ""
+
+#. module: l10n_br_repair
+#: model:ir.model.fields,help:l10n_br_repair.field_l10n_br_repair_fiscal_line_mixin__financial_total_gross
+#: model:ir.model.fields,help:l10n_br_repair.field_repair_fee__financial_total_gross
+#: model:ir.model.fields,help:l10n_br_repair.field_repair_line__financial_total_gross
+msgid "Total amount before any discounts are applied."
+msgstr ""
+
+#. module: l10n_br_repair
+#: model:ir.model.fields,help:l10n_br_repair.field_l10n_br_repair_fiscal_line_mixin__price_gross
+#: model:ir.model.fields,help:l10n_br_repair.field_repair_fee__price_gross
+#: model:ir.model.fields,help:l10n_br_repair.field_repair_line__price_gross
+msgid ""
+"Total value of products or services (quantity x unit price)before any "
+"discounts."
 msgstr ""
 
 #. module: l10n_br_repair

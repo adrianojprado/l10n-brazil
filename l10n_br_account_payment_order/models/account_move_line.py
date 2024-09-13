@@ -88,11 +88,6 @@ class AccountMoveLine(models.Model):
         copy=False,
     )
 
-    journal_entry_ref = fields.Char(
-        compute="_compute_journal_entry_ref",
-        store=True,
-    )
-
     # TODO: Confirmar o caso de uso de diferentes modos de pagto na mesma
     #  account.invoice
     payment_mode_id = fields.Many2one(string="Modo de Pagamento")
@@ -103,8 +98,16 @@ class AccountMoveLine(models.Model):
         copy=False,
     )
 
+    # TODO: Remover o campo na próxima versão,
+    #  usando apenas para migração para o l10n_br_cnab.code
     mov_instruction_code_id = fields.Many2one(
         comodel_name="l10n_br_cnab.mov.instruction.code",
+        string="Código da Instrução para Movimento",
+        help="Campo G061 do CNAB",
+        copy=False,
+    )
+    instruction_move_code_id = fields.Many2one(
+        comodel_name="l10n_br_cnab.code",
         string="Código da Instrução para Movimento",
         help="Campo G061 do CNAB",
         copy=False,
@@ -132,18 +135,6 @@ class AccountMoveLine(models.Model):
         inverse_name="move_line_id",
     )
 
-    @api.depends("move_id")
-    def _compute_journal_entry_ref(self):
-        for record in self:
-            if record.name:
-                record.journal_entry_ref = record.name
-            elif record.move_id.name:
-                record.journal_entry_ref = record.move_id.name
-            elif record.invoice_id and record.invoice_id.number:
-                record.journal_entry_ref = record.invoice_id.number
-            else:
-                record.journal_entry_ref = "*" + str(record.move_id.id)
-
     def _get_default_service_type(self):
         if self.move_id.move_type == "in_invoice":
             return PAGAMENTO_FORNECEDOR
@@ -161,7 +152,7 @@ class AccountMoveLine(models.Model):
                     "document_number": self.document_number,
                     "company_title_identification": self.company_title_identification,
                     # Codigo de Instrução do Movimento
-                    "mov_instruction_code_id": self.mov_instruction_code_id.id,
+                    "instruction_move_code_id": self.instruction_move_code_id.id,
                     "communication_type": "cnab",
                     # Campos abaixo estão sendo adicionados devido ao problema de
                     # Ordens de Pagto vinculadas devido o ondelete=restrict no
@@ -180,8 +171,9 @@ class AccountMoveLine(models.Model):
             # Se for uma solicitação de baixa do título é preciso informar o
             # campo debit o codigo original coloca o amount_residual
             if (
-                self.mov_instruction_code_id.id
-                == self.payment_mode_id.cnab_write_off_code_id.id
+                self.payment_mode_id.write_off_code_id
+                and self.instruction_move_code_id
+                == self.payment_mode_id.write_off_code_id
             ):
                 vals["amount_currency"] = self.credit or self.debit
 

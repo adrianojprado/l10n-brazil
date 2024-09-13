@@ -174,7 +174,7 @@ class AccountMove(models.Model):
         for vals in vals_list:
             for field in self._shadowed_fields():
                 if field in vals:
-                    vals["fiscal_%s" % (field,)] = vals[field]
+                    vals["fiscal_proxy_%s" % (field,)] = vals[field]
 
     def ensure_one_doc(self):
         self.ensure_one()
@@ -285,7 +285,7 @@ class AccountMove(models.Model):
                     move.is_invoice(include_receipts=True)
                     and not line.exclude_from_invoice_tab
                 ):
-                    line._update_taxes()
+                    line._update_fiscal_taxes()
 
         result = super()._compute_amount()
         for move in self.filtered(lambda m: m.company_id.country_id.code == "BR"):
@@ -562,7 +562,7 @@ class AccountMove(models.Model):
                     )
             move.fiscal_document_ids.filtered(
                 lambda d: d.state_edoc != SITUACAO_EDOC_EM_DIGITACAO
-            ).action_document_back2draft()
+            ).document_back2draft()
         return super().button_draft()
 
     def action_document_send(self):
@@ -597,9 +597,10 @@ class AccountMove(models.Model):
             move.button_draft()
 
     def _post(self, soft=True):
-        self.mapped("fiscal_document_id").filtered(
-            lambda d: d.document_type_id
-        ).action_document_confirm()
+        for move in self.with_context(skip_post=True):
+            move.fiscal_document_ids.filtered(
+                lambda d: d.document_type_id
+            ).action_document_confirm()
         return super()._post(soft=soft)
 
     def view_xml(self):
@@ -613,16 +614,6 @@ class AccountMove(models.Model):
     def action_send_email(self):
         self.ensure_one_doc()
         return self.fiscal_document_id.action_send_email()
-
-    @api.onchange("document_type_id")
-    def _onchange_document_type_id(self):
-        # We need to ensure that invoices without a fiscal document have the
-        # document_number blank, as all invoices without a fiscal document share this
-        # same field, they are linked to the same dummy fiscal document.
-        # Otherwise, in the tree view, this field will be displayed with the same value
-        # for all these invoices.
-        if not self.document_type_id:
-            self.document_number = ""
 
     def _reverse_moves(self, default_values_list=None, cancel=False):
         new_moves = super()._reverse_moves(

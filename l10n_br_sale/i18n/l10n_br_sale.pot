@@ -86,7 +86,6 @@ msgstr ""
 
 #. module: l10n_br_sale
 #: model:ir.model.fields,field_description:l10n_br_sale.field_sale_order__amount_financial_total_gross
-#: model:ir.model.fields,field_description:l10n_br_sale.field_sale_order_line__financial_total_gross
 msgid "Amount Financial Gross"
 msgstr ""
 
@@ -132,7 +131,6 @@ msgstr ""
 
 #. module: l10n_br_sale
 #: model:ir.model.fields,help:l10n_br_sale.field_sale_order__amount_price_gross
-#: model:ir.model.fields,help:l10n_br_sale.field_sale_order_line__price_gross
 msgid "Amount without discount."
 msgstr ""
 
@@ -503,6 +501,21 @@ msgid "Display Name"
 msgstr ""
 
 #. module: l10n_br_sale
+#: model:ir.model.fields,field_description:l10n_br_sale.field_sale_order__document_number
+msgid "Document Number"
+msgstr ""
+
+#. module: l10n_br_sale
+#: model:ir.model.fields,field_description:l10n_br_sale.field_sale_order__document_serie_id
+msgid "Document Serie"
+msgstr ""
+
+#. module: l10n_br_sale
+#: model:ir.model.fields,field_description:l10n_br_sale.field_sale_order__document_type_id
+msgid "Document Type"
+msgstr ""
+
+#. module: l10n_br_sale
 #: model:ir.model.fields.selection,name:l10n_br_sale.selection__sale_report__fiscal_type__02
 msgid "Embalagem"
 msgstr ""
@@ -545,6 +558,11 @@ msgid "Financial Discount Value"
 msgstr ""
 
 #. module: l10n_br_sale
+#: model:ir.model.fields,field_description:l10n_br_sale.field_sale_order_line__financial_total_gross
+msgid "Financial Gross Amount"
+msgstr ""
+
+#. module: l10n_br_sale
 #: model:ir.model.fields,field_description:l10n_br_sale.field_sale_order__fiscal_additional_data
 msgid "Fiscal Additional Data"
 msgstr ""
@@ -577,14 +595,6 @@ msgid "Fiscal Operation Type"
 msgstr ""
 
 #. module: l10n_br_sale
-#: model:ir.model.fields,field_description:l10n_br_sale.field_account_bank_statement_line__fiscal_partner_shipping_id
-#: model:ir.model.fields,field_description:l10n_br_sale.field_account_move__fiscal_partner_shipping_id
-#: model:ir.model.fields,field_description:l10n_br_sale.field_account_payment__fiscal_partner_shipping_id
-#: model:ir.model.fields,field_description:l10n_br_sale.field_l10n_br_fiscal_document__fiscal_partner_shipping_id
-msgid "Fiscal Partner Shipping"
-msgstr ""
-
-#. module: l10n_br_sale
 #: model:ir.model.fields,field_description:l10n_br_sale.field_sale_order_line__fiscal_price
 msgid "Fiscal Price"
 msgstr ""
@@ -597,6 +607,14 @@ msgstr ""
 #. module: l10n_br_sale
 #: model:ir.model.fields,field_description:l10n_br_sale.field_sale_order_line__fiscal_genre_code
 msgid "Fiscal Product Genre Code"
+msgstr ""
+
+#. module: l10n_br_sale
+#: model:ir.model.fields,field_description:l10n_br_sale.field_account_bank_statement_line__fiscal_proxy_partner_shipping_id
+#: model:ir.model.fields,field_description:l10n_br_sale.field_account_move__fiscal_proxy_partner_shipping_id
+#: model:ir.model.fields,field_description:l10n_br_sale.field_account_payment__fiscal_proxy_partner_shipping_id
+#: model:ir.model.fields,field_description:l10n_br_sale.field_l10n_br_fiscal_document__fiscal_proxy_partner_shipping_id
+msgid "Fiscal Proxy Partner Shipping"
 msgstr ""
 
 #. module: l10n_br_sale
@@ -1168,6 +1186,11 @@ msgid "Journal Entry"
 msgstr ""
 
 #. module: l10n_br_sale
+#: model:ir.model.fields,field_description:l10n_br_sale.field_sale_order__document_key
+msgid "Key"
+msgstr ""
+
+#. module: l10n_br_sale
 #: model:ir.model.fields,field_description:l10n_br_sale.field_account_move____last_update
 #: model:ir.model.fields,field_description:l10n_br_sale.field_l10n_br_fiscal_document____last_update
 #: model:ir.model.fields,field_description:l10n_br_sale.field_res_company____last_update
@@ -1511,6 +1534,11 @@ msgid "Sales Order Line"
 msgstr ""
 
 #. module: l10n_br_sale
+#: model:ir.model.fields,field_description:l10n_br_sale.field_sale_order__document_serie
+msgid "Serie Number"
+msgstr ""
+
+#. module: l10n_br_sale
 #: model:ir.model.fields,field_description:l10n_br_sale.field_sale_order_line__service_type_id
 msgid "Service Type LC 166"
 msgstr ""
@@ -1693,6 +1721,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_sale.field_sale_order__amount_total
 #: model:ir.model.fields,field_description:l10n_br_sale.field_sale_order_line__price_total
 msgid "Total"
+msgstr ""
+
+#. module: l10n_br_sale
+#: model:ir.model.fields,help:l10n_br_sale.field_sale_order_line__financial_total_gross
+msgid "Total amount before any discounts are applied."
+msgstr ""
+
+#. module: l10n_br_sale
+#: model:ir.model.fields,help:l10n_br_sale.field_sale_order_line__price_gross
+msgid ""
+"Total value of products or services (quantity x unit price)before any "
+"discounts."
 msgstr ""
 
 #. module: l10n_br_sale

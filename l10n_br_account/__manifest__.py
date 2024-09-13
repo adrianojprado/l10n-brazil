@@ -2,12 +2,13 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 {
-    "name": "Brazilian Localization Account",
+    "name": "Invoicing and accounting entries for Brazil",
+    "summary": "Invoicing and accounting entries for Brazil",
     "category": "Localisation",
     "license": "AGPL-3",
     "author": "Akretion, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/l10n-brazil",
-    "version": "14.0.11.2.0",
+    "version": "14.0.11.13.0",
     "development_status": "Beta",
     "maintainers": ["renatonlima", "rvalyi"],
     "depends": [
@@ -26,7 +27,7 @@
         "views/account_tax_template_view.xml",
         "views/fiscal_operation_view.xml",
         "views/fiscal_operation_line_view.xml",
-        "views/account_invoice_view.xml",
+        "views/account_move_view.xml",
         "views/document_line_view.xml",
         "views/document_view.xml",
         "views/fiscal_invoice_view.xml",

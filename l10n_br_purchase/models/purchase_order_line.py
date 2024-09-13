@@ -96,15 +96,13 @@ class PurchaseOrderLine(models.Model):
         for line in self:
             if line.fiscal_operation_id:
                 # Update taxes fields
-                line._update_taxes()
+                line._update_fiscal_taxes()
                 # Call mixin compute method
                 line._compute_amounts()
                 # Update record
                 line.update(
                     {
-                        "price_subtotal": line.amount_untaxed,
                         "price_tax": line.amount_tax,
-                        "price_gross": line.amount_untaxed + line.discount_value,
                         "price_total": line.amount_total,
                     }
                 )

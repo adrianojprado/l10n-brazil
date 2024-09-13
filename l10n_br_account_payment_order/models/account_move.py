@@ -88,8 +88,8 @@ class AccountMove(models.Model):
             return self.document_number
         return self.name
 
-    def action_post(self):
-        result = super().action_post()
+    def _post(self, soft=True):
+        result = super()._post(soft)
         self.load_cnab_info()
         return result
 
@@ -132,9 +132,7 @@ class AccountMove(models.Model):
             interval.instructions = instructions
             # Codigo de Instrução do Movimento pode variar,
             # mesmo no CNAB 240
-            interval.mov_instruction_code_id = (
-                self.payment_mode_id.cnab_sending_code_id.id
-            )
+            interval.instruction_move_code_id = self.payment_mode_id.sending_code_id
         filtered_invoice_ids = self.filtered(
             lambda s: (
                 s.payment_mode_id and s.payment_mode_id.auto_create_payment_order

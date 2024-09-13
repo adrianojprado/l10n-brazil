@@ -51,7 +51,6 @@ msgstr ""
 
 #. module: l10n_br_purchase
 #: model:ir.model.fields,field_description:l10n_br_purchase.field_purchase_order__amount_financial_total_gross
-#: model:ir.model.fields,field_description:l10n_br_purchase.field_purchase_order_line__financial_total_gross
 msgid "Amount Financial Gross"
 msgstr ""
 
@@ -62,7 +61,6 @@ msgstr ""
 
 #. module: l10n_br_purchase
 #: model:ir.model.fields,field_description:l10n_br_purchase.field_purchase_order__amount_price_gross
-#: model:ir.model.fields,field_description:l10n_br_purchase.field_purchase_order_line__price_gross
 msgid "Amount Gross"
 msgstr ""
 
@@ -98,7 +96,6 @@ msgstr ""
 
 #. module: l10n_br_purchase
 #: model:ir.model.fields,help:l10n_br_purchase.field_purchase_order__amount_price_gross
-#: model:ir.model.fields,help:l10n_br_purchase.field_purchase_order_line__price_gross
 msgid "Amount without discount."
 msgstr ""
 
@@ -351,7 +348,6 @@ msgid "Companies"
 msgstr ""
 
 #. module: l10n_br_purchase
-#: model:ir.model.fields,field_description:l10n_br_purchase.field_purchase_order__active_company_country_id
 #: model:ir.model.fields,field_description:l10n_br_purchase.field_purchase_order__company_id
 msgid "Company"
 msgstr ""
@@ -359,6 +355,11 @@ msgstr ""
 #. module: l10n_br_purchase
 #: model:ir.model.fields,field_description:l10n_br_purchase.field_purchase_order_line__partner_company_type
 msgid "Company Type"
+msgstr ""
+
+#. module: l10n_br_purchase
+#: model:ir.model.fields,field_description:l10n_br_purchase.field_purchase_order__company_country_id
+msgid "Country"
 msgstr ""
 
 #. module: l10n_br_purchase
@@ -426,6 +427,21 @@ msgid "Display Name"
 msgstr ""
 
 #. module: l10n_br_purchase
+#: model:ir.model.fields,field_description:l10n_br_purchase.field_purchase_order__document_number
+msgid "Document Number"
+msgstr ""
+
+#. module: l10n_br_purchase
+#: model:ir.model.fields,field_description:l10n_br_purchase.field_purchase_order__document_serie_id
+msgid "Document Serie"
+msgstr ""
+
+#. module: l10n_br_purchase
+#: model:ir.model.fields,field_description:l10n_br_purchase.field_purchase_order__document_type_id
+msgid "Document Type"
+msgstr ""
+
+#. module: l10n_br_purchase
 #: model:ir.model.fields.selection,name:l10n_br_purchase.selection__purchase_report__fiscal_type__02
 msgid "Embalagem"
 msgstr ""
@@ -465,6 +481,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_purchase.field_purchase_order__amount_financial_discount_value
 #: model:ir.model.fields,field_description:l10n_br_purchase.field_purchase_order_line__financial_discount_value
 msgid "Financial Discount Value"
+msgstr ""
+
+#. module: l10n_br_purchase
+#: model:ir.model.fields,field_description:l10n_br_purchase.field_purchase_order_line__financial_total_gross
+msgid "Financial Gross Amount"
 msgstr ""
 
 #. module: l10n_br_purchase
@@ -544,6 +565,11 @@ msgstr ""
 #. module: l10n_br_purchase
 #: model_terms:ir.ui.view,arch_db:l10n_br_purchase.report_purchaseorder_document_l10n_br_purchase
 msgid "Gross"
+msgstr ""
+
+#. module: l10n_br_purchase
+#: model:ir.model.fields,field_description:l10n_br_purchase.field_purchase_order_line__price_gross
+msgid "Gross Product/Service Amount"
 msgstr ""
 
 #. module: l10n_br_purchase
@@ -1074,6 +1100,11 @@ msgid "Journal Entry"
 msgstr ""
 
 #. module: l10n_br_purchase
+#: model:ir.model.fields,field_description:l10n_br_purchase.field_purchase_order__document_key
+msgid "Key"
+msgstr ""
+
+#. module: l10n_br_purchase
 #: model:ir.model.fields,field_description:l10n_br_purchase.field_account_move____last_update
 #: model:ir.model.fields,field_description:l10n_br_purchase.field_purchase_order____last_update
 #: model:ir.model.fields,field_description:l10n_br_purchase.field_purchase_order_line____last_update
@@ -1385,6 +1416,11 @@ msgid "Razão Social"
 msgstr ""
 
 #. module: l10n_br_purchase
+#: model:ir.model.fields,field_description:l10n_br_purchase.field_purchase_order__document_serie
+msgid "Serie Number"
+msgstr ""
+
+#. module: l10n_br_purchase
 #: model:ir.model.fields,field_description:l10n_br_purchase.field_purchase_order_line__service_type_id
 msgid "Service Type LC 166"
 msgstr ""
@@ -1559,6 +1595,18 @@ msgstr ""
 #. module: l10n_br_purchase
 #: model:ir.model.fields,field_description:l10n_br_purchase.field_purchase_report__total_with_taxes
 msgid "Total With Taxes"
+msgstr ""
+
+#. module: l10n_br_purchase
+#: model:ir.model.fields,help:l10n_br_purchase.field_purchase_order_line__financial_total_gross
+msgid "Total amount before any discounts are applied."
+msgstr ""
+
+#. module: l10n_br_purchase
+#: model:ir.model.fields,help:l10n_br_purchase.field_purchase_order_line__price_gross
+msgid ""
+"Total value of products or services (quantity x unit price)before any "
+"discounts."
 msgstr ""
 
 #. module: l10n_br_purchase

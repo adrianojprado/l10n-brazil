@@ -11,15 +11,18 @@ class StockPicking(models.Model):
     @api.model
     def _default_fiscal_operation(self):
         company = self.env.company
-        fiscal_operation = company.stock_fiscal_operation_id
-        picking_type_id = self.env.context.get("default_picking_type_id")
-        if picking_type_id:
-            picking_type = self.env["stock.picking.type"].browse(picking_type_id)
-            fiscal_operation = picking_type.fiscal_operation_id or (
-                company.stock_in_fiscal_operation_id
-                if picking_type.code == "incoming"
-                else company.stock_out_fiscal_operation_id
-            )
+        fiscal_operation = False
+        if self.env.company.country_id == self.env.ref("base.br"):
+            fiscal_operation = company.stock_fiscal_operation_id
+            picking_type_id = self.env.context.get("default_picking_type_id")
+            if picking_type_id:
+                picking_type = self.env["stock.picking.type"].browse(picking_type_id)
+                fiscal_operation = picking_type.fiscal_operation_id or (
+                    company.stock_in_fiscal_operation_id
+                    if picking_type.code == "incoming"
+                    else company.stock_out_fiscal_operation_id
+                )
+
         return fiscal_operation
 
     @api.model
@@ -87,3 +90,34 @@ class StockPicking(models.Model):
             }
 
         return order_view
+
+    def _put_in_pack(self, move_line_ids, create_package_level=True):
+        package = super()._put_in_pack(move_line_ids, create_package_level)
+        if (
+            package
+            and self.picking_type_id.pre_generate_fiscal_document_number == "pack"
+        ):
+            self._generate_document_number()
+        return package
+
+    def button_validate(self):
+        result = super().button_validate()
+        for record in self:
+            if (
+                record.state == "done"
+                and record.picking_type_id.pre_generate_fiscal_document_number
+                == "validate"
+            ):
+                record._generate_document_number()
+        return result
+
+    def _generate_document_number(self):
+        if self.company_id.document_type_id and self.fiscal_operation_id:
+            if self.document_serie and self.document_number:
+                return
+            self.document_type_id = self.company_id.document_type_id
+            self.document_serie_id = self.document_type_id.get_document_serie(
+                self.company_id, self.fiscal_operation_id
+            )
+            self.document_serie = self.document_serie_id.code
+            self.document_number = self.document_serie_id.next_seq_number()

@@ -13,7 +13,7 @@ from odoo.exceptions import UserError
 
 from odoo.addons.account_move_base_import.parser.file_parser import FileParser
 
-from ..constants.br_cobranca import get_brcobranca_api_url
+from ..constants.br_cobranca import TIMEOUT, get_brcobranca_api_url
 
 logger = logging.getLogger(__name__)
 
@@ -91,6 +91,7 @@ class CNABFileParser(FileParser):
                 "bank": bank_name_brcobranca,
             },
             files=files,
+            timeout=TIMEOUT,
         )
 
         if res.status_code != 201:
@@ -104,8 +105,8 @@ class CNABFileParser(FileParser):
     def _get_date_format(self, bank_name_brcobranca):
         # TODO: Idealmente o JSON de Retorno do BRCobranca deveria vir
         #  padronizado para não ser necessário ser feito esse tratamento aqui
-        if bank_name_brcobranca == "ailos":
-            # No Banco AILOS o formato da Data é completo com os 4 digitos.
+        if bank_name_brcobranca in ("ailos", "santander"):
+            # No Banco AILOS e Santander o formato da Data é completo com os 4 digitos.
             zeros_date = "00000000"
             date_format = "%d%m%Y"
         else:
@@ -182,8 +183,8 @@ class CNABFileParser(FileParser):
 
         bank_name_brcobranca = dict_brcobranca_bank[self.bank.code_bc]
 
-        if bank_name_brcobranca == "ailos":
-            # No AILOS o código de registro onde ficam as linhas CNAB é o 3.
+        if bank_name_brcobranca in ("ailos", "santander"):
+            # No AILOS e Santander o código de registro onde ficam as linhas CNAB é o 3.
             registration_code_allowed = 3
         elif bank_name_brcobranca == "banco_brasil":
             # No Banco do Brasil o código do registro principal é o 7.
@@ -319,9 +320,7 @@ class CNABFileParser(FileParser):
 
             # Codigos de Movimento de Retorno - Liquidação
             cnab_liq_move_code = []
-            for (
-                move_code
-            ) in account_move_line.payment_mode_id.cnab_liq_return_move_code_ids:
+            for move_code in account_move_line.payment_mode_id.liq_return_move_code_ids:
                 cnab_liq_move_code.append(move_code.code)
 
             favored_bank_account = (
@@ -387,11 +386,12 @@ class CNABFileParser(FileParser):
         return result_row_list
 
     def _get_description_occurrence(self, payment_method_cnab, cod_ocorrencia):
-        cnab_return_move_code = self.env["l10n_br_cnab.return.move.code"].search(
+        cnab_return_move_code = self.env["l10n_br_cnab.code"].search(
             [
                 ("bank_ids", "in", self.bank.id),
                 ("payment_method_ids", "in", payment_method_cnab.id),
                 ("code", "=", cod_ocorrencia),
+                ("code_type", "=", "return_move_code"),
             ]
         )
         if cnab_return_move_code:

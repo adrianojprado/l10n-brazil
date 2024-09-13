@@ -56,7 +56,6 @@ msgid "Amount Financial"
 msgstr ""
 
 #. module: l10n_br_stock_account
-#: model:ir.model.fields,field_description:l10n_br_stock_account.field_stock_move__financial_total_gross
 #: model:ir.model.fields,field_description:l10n_br_stock_account.field_stock_picking__amount_financial_total_gross
 msgid "Amount Financial Gross"
 msgstr ""
@@ -67,7 +66,6 @@ msgid "Amount Fiscal"
 msgstr ""
 
 #. module: l10n_br_stock_account
-#: model:ir.model.fields,field_description:l10n_br_stock_account.field_stock_move__price_gross
 #: model:ir.model.fields,field_description:l10n_br_stock_account.field_stock_picking__amount_price_gross
 msgid "Amount Gross"
 msgstr ""
@@ -106,7 +104,6 @@ msgid "Amount Untaxed"
 msgstr ""
 
 #. module: l10n_br_stock_account
-#: model:ir.model.fields,help:l10n_br_stock_account.field_stock_move__price_gross
 #: model:ir.model.fields,help:l10n_br_stock_account.field_stock_picking__amount_price_gross
 msgid "Amount without discount."
 msgstr ""
@@ -333,6 +330,12 @@ msgid "CST PIS ST"
 msgstr ""
 
 #. module: l10n_br_stock_account
+#: model:ir.model.fields,help:l10n_br_stock_account.field_stock_picking_type__pre_generate_fiscal_document_number
+msgid ""
+"Check this box if you want to generate fiscal document for this operation."
+msgstr ""
+
+#. module: l10n_br_stock_account
 #: model:ir.model.fields,field_description:l10n_br_stock_account.field_stock_move__city_taxation_code_id
 msgid "City Taxation Code"
 msgstr ""
@@ -437,6 +440,21 @@ msgid "Display Name"
 msgstr ""
 
 #. module: l10n_br_stock_account
+#: model:ir.model.fields,field_description:l10n_br_stock_account.field_stock_picking__document_number
+msgid "Document Number"
+msgstr ""
+
+#. module: l10n_br_stock_account
+#: model:ir.model.fields,field_description:l10n_br_stock_account.field_stock_picking__document_serie_id
+msgid "Document Serie"
+msgstr ""
+
+#. module: l10n_br_stock_account
+#: model:ir.model.fields,field_description:l10n_br_stock_account.field_stock_picking__document_type_id
+msgid "Document Type"
+msgstr ""
+
+#. module: l10n_br_stock_account
 #: model:ir.model.fields,field_description:l10n_br_stock_account.field_stock_move__estimate_tax
 msgid "Estimate Tax"
 msgstr ""
@@ -480,6 +498,11 @@ msgid "Financial Discount Value"
 msgstr ""
 
 #. module: l10n_br_stock_account
+#: model:ir.model.fields,field_description:l10n_br_stock_account.field_stock_move__financial_total_gross
+msgid "Financial Gross Amount"
+msgstr ""
+
+#. module: l10n_br_stock_account
 #: model_terms:ir.ui.view,arch_db:l10n_br_stock_account.stock_picking_form
 msgid "Fiscal"
 msgstr ""
@@ -492,6 +515,11 @@ msgstr ""
 #. module: l10n_br_stock_account
 #: model:ir.model.fields,help:l10n_br_stock_account.field_stock_picking__manual_fiscal_additional_data
 msgid "Fiscal Additional data manually entered by user"
+msgstr ""
+
+#. module: l10n_br_stock_account
+#: model_terms:ir.ui.view,arch_db:l10n_br_stock_account.stock_picking_form
+msgid "Fiscal Document Info"
 msgstr ""
 
 #. module: l10n_br_stock_account
@@ -546,6 +574,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_stock_account.field_stock_move__freight_value
 #: model:ir.model.fields,field_description:l10n_br_stock_account.field_stock_picking__amount_freight_value
 msgid "Freight Value"
+msgstr ""
+
+#. module: l10n_br_stock_account
+#: model:ir.model.fields,field_description:l10n_br_stock_account.field_stock_move__price_gross
+msgid "Gross Product/Service Amount"
 msgstr ""
 
 #. module: l10n_br_stock_account
@@ -1076,8 +1109,13 @@ msgstr ""
 #: code:addons/l10n_br_stock_account/wizards/stock_invoice_onshipping.py:0
 #, python-format
 msgid ""
-"Invalid Journal! There is not journal defined for this company: {} in fiscal"
-" operation: {} !"
+"Invalid Journal! There is not journal defined for this company: %(company)s "
+"in fiscal operation: %(operation)s!"
+msgstr ""
+
+#. module: l10n_br_stock_account
+#: model:ir.model.fields.selection,name:l10n_br_stock_account.selection__stock_picking_type__pre_generate_fiscal_document_number__invoice_wizard
+msgid "Invoice Create Wizard"
 msgstr ""
 
 #. module: l10n_br_stock_account
@@ -1096,6 +1134,11 @@ msgstr ""
 #. module: l10n_br_stock_account
 #: model_terms:ir.ui.view,arch_db:l10n_br_stock_account.stock_picking_form
 msgid "Invoicing"
+msgstr ""
+
+#. module: l10n_br_stock_account
+#: model:ir.model.fields,field_description:l10n_br_stock_account.field_stock_picking__document_key
+msgid "Key"
 msgstr ""
 
 #. module: l10n_br_stock_account
@@ -1148,6 +1191,11 @@ msgstr ""
 #. module: l10n_br_stock_account
 #: model:ir.model.fields,field_description:l10n_br_stock_account.field_stock_move__simple_without_icms_value
 msgid "National Simple Taxes without ICMS"
+msgstr ""
+
+#. module: l10n_br_stock_account
+#: model:ir.model.fields.selection,name:l10n_br_stock_account.selection__stock_picking_type__pre_generate_fiscal_document_number__none
+msgid "None"
 msgstr ""
 
 #. module: l10n_br_stock_account
@@ -1306,6 +1354,11 @@ msgid "PIS WH Base Type"
 msgstr ""
 
 #. module: l10n_br_stock_account
+#: model:ir.model.fields.selection,name:l10n_br_stock_account.selection__stock_picking_type__pre_generate_fiscal_document_number__pack
+msgid "Pack"
+msgstr ""
+
+#. module: l10n_br_stock_account
 #: model:ir.model.fields,field_description:l10n_br_stock_account.field_stock_move__partner_order
 msgid "Partner Order (xPed)"
 msgstr ""
@@ -1331,6 +1384,11 @@ msgid "Product"
 msgstr ""
 
 #. module: l10n_br_stock_account
+#: model:ir.model.fields,field_description:l10n_br_stock_account.field_stock_picking_type__pre_generate_fiscal_document_number
+msgid "Pré generate Fiscal Document Number"
+msgstr ""
+
+#. module: l10n_br_stock_account
 #: model:ir.model.fields,field_description:l10n_br_stock_account.field_stock_move__partner_is_public_entity
 msgid "Public Entity"
 msgstr ""
@@ -1338,6 +1396,11 @@ msgstr ""
 #. module: l10n_br_stock_account
 #: model:ir.model,name:l10n_br_stock_account.model_stock_return_picking
 msgid "Return Picking"
+msgstr ""
+
+#. module: l10n_br_stock_account
+#: model:ir.model.fields,field_description:l10n_br_stock_account.field_stock_picking__document_serie
+msgid "Serie Number"
 msgstr ""
 
 #. module: l10n_br_stock_account
@@ -1556,6 +1619,18 @@ msgid "To Be Invoiced"
 msgstr ""
 
 #. module: l10n_br_stock_account
+#: model:ir.model.fields,help:l10n_br_stock_account.field_stock_move__financial_total_gross
+msgid "Total amount before any discounts are applied."
+msgstr ""
+
+#. module: l10n_br_stock_account
+#: model:ir.model.fields,help:l10n_br_stock_account.field_stock_move__price_gross
+msgid ""
+"Total value of products or services (quantity x unit price)before any "
+"discounts."
+msgstr ""
+
+#. module: l10n_br_stock_account
 #: model:ir.model,name:l10n_br_stock_account.model_stock_picking
 msgid "Transfer"
 msgstr ""
@@ -1573,6 +1648,11 @@ msgstr ""
 #. module: l10n_br_stock_account
 #: model:ir.model.fields,field_description:l10n_br_stock_account.field_stock_move__price_unit
 msgid "Unit Price"
+msgstr ""
+
+#. module: l10n_br_stock_account
+#: model:ir.model.fields.selection,name:l10n_br_stock_account.selection__stock_picking_type__pre_generate_fiscal_document_number__validate
+msgid "Validate"
 msgstr ""
 
 #. module: l10n_br_stock_account

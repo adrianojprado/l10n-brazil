@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-04-19 17:35+0000\n"
+"PO-Revision-Date: 2024-09-11 18:06+0000\n"
 "Last-Translator: Marcel Savegnago <marcel.savegnago@gmail.com>\n"
 "Language-Team: none\n"
 "Language: pt_BR\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: l10n_br_cnab_structure
 #: model_terms:ir.ui.view,arch_db:l10n_br_cnab_structure.cnab_structure_form_view
@@ -712,7 +712,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_cnab_structure.field_l10n_br_cnab_return_lot__display_name
 #: model:ir.model.fields,field_description:l10n_br_cnab_structure.field_l10n_br_cnab_structure__display_name
 msgid "Display Name"
-msgstr "Nome de Exibição"
+msgstr "Nome Exibido"
 
 #. module: l10n_br_cnab_structure
 #: model_terms:ir.ui.view,arch_db:l10n_br_cnab_structure.l10n_br_cnab_return_event_form_view_structure
@@ -736,7 +736,7 @@ msgstr "Baixar Arquivo"
 #: model:ir.model.fields.selection,name:l10n_br_cnab_structure.selection__l10n_br_cnab_return_log__state__draft
 #: model:ir.model.fields.selection,name:l10n_br_cnab_structure.selection__l10n_br_cnab_structure__state__draft
 msgid "Draft"
-msgstr "Rascunho"
+msgstr "Provisório"
 
 #. module: l10n_br_cnab_structure
 #: model:ir.model.fields.selection,name:l10n_br_cnab_structure.selection__cnab_pix_key_type__key_type__email
@@ -1782,7 +1782,7 @@ msgstr ""
 #. module: l10n_br_cnab_structure
 #: model:ir.model.fields.selection,name:l10n_br_cnab_structure.selection__cnab_line_group_field_condition__operator__in
 msgid "in"
-msgstr ""
+msgstr "Entrada"
 
 #. module: l10n_br_cnab_structure
 #: model:ir.model.fields,help:l10n_br_cnab_structure.field_l10n_br_cnab_line_field__assumed_comma

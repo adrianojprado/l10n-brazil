@@ -11,6 +11,8 @@ from odoo import _
 from odoo.exceptions import UserError
 from odoo.tools import config
 
+TIMEOUT = 300  # seconds
+
 DICT_BRCOBRANCA_CNAB_TYPE = {
     "240": "cnab240",
     "400": "cnab400",
@@ -51,8 +53,11 @@ def get_brcobranca_bank(bank_account_id, payment_method_code):
     if not bank_name_brcobranca or payment_method_code not in cnab_remessa:
         # Lista de bancos não implentados no BRCobranca
         raise UserError(
-            _("The Bank {} CNAB {} is not implemented in BRCobranca.").format(
-                bank_account_id.bank_id.name, payment_method_code
+            _(
+                "The Bank %(bank)s CNAB %(cnab_code)s is not implemented "
+                "in BRCobranca.",
+                bank=bank_account_id.bank_id.name,
+                cnab_code=payment_method_code,
             )
         )
     return bank_name_brcobranca

@@ -24,15 +24,6 @@ class StockInvoiceOnshipping(models.TransientModel):
             # Caso Brasileiro
             return True
 
-    @api.onchange("group")
-    def onchange_group(self):
-        super().onchange_group()
-        pickings = self._load_pickings()
-        has_fiscal_operation = False
-        if pickings.mapped("fiscal_operation_id"):
-            has_fiscal_operation = True
-        self.has_fiscal_operation = has_fiscal_operation
-
     has_fiscal_operation = fields.Boolean()
 
     fiscal_operation_journal = fields.Boolean(
@@ -44,6 +35,16 @@ class StockInvoiceOnshipping(models.TransientModel):
         selection_add=[("fiscal_operation", "Fiscal Operation")],
         ondelete={"fiscal_operation": "set default"},
     )
+
+    @api.onchange("group")
+    def onchange_group(self):
+        res = super().onchange_group()
+        pickings = self._load_pickings()
+        has_fiscal_operation = False
+        if pickings.mapped("fiscal_operation_id"):
+            has_fiscal_operation = True
+        self.has_fiscal_operation = has_fiscal_operation
+        return res
 
     def _get_journal(self):
         """
@@ -59,8 +60,10 @@ class StockInvoiceOnshipping(models.TransientModel):
                 raise UserError(
                     _(
                         "Invalid Journal! There is not journal defined"
-                        " for this company: {} in fiscal operation: {} !"
-                    ).format(picking.company_id.name, picking.fiscal_operation_id.name)
+                        " for this company: %(company)s in fiscal operation: %(operation)s!",
+                        company=picking.company_id.name,
+                        operation=picking.fiscal_operation_id.name,
+                    )
                 )
         else:
             journal = super()._get_journal()
@@ -68,6 +71,9 @@ class StockInvoiceOnshipping(models.TransientModel):
         return journal
 
     def _build_invoice_values_from_pickings(self, pickings):
+        # Gera o numero do documento fiscal antes de criar a fatura
+        self._pre_generate_document_number(pickings)
+
         invoice, values = super()._build_invoice_values_from_pickings(pickings)
         picking = fields.first(pickings)
         if not picking.fiscal_operation_id:
@@ -76,16 +82,18 @@ class StockInvoiceOnshipping(models.TransientModel):
 
         fiscal_vals = picking._prepare_br_fiscal_dict()
 
-        document_type = picking.company_id.document_type_id
-        document_type_id = picking.company_id.document_type_id.id
+        if not fiscal_vals.get("document_type_id"):
+            # não sobrescreve os dados caso ás informações já tenham sido geradas
+            # nó método _put_in_pack
+            document_type_id = picking.company_id.document_type_id
 
-        fiscal_vals["document_type_id"] = document_type_id
+            fiscal_vals["document_type_id"] = document_type_id.id
 
-        document_serie = document_type.get_document_serie(
-            picking.company_id, picking.fiscal_operation_id
-        )
-        if document_serie:
-            fiscal_vals["document_serie_id"] = document_serie.id
+            document_serie = document_type_id.get_document_serie(
+                picking.company_id, picking.fiscal_operation_id
+            )
+            if document_serie:
+                fiscal_vals["document_serie_id"] = document_serie.id
 
         if picking.fiscal_operation_id and picking.fiscal_operation_id.journal_id:
             fiscal_vals["journal_id"] = picking.fiscal_operation_id.journal_id.id
@@ -170,3 +178,11 @@ class StockInvoiceOnshipping(models.TransientModel):
             key = key + (move.fiscal_operation_line_id,)
 
         return key
+
+    def _pre_generate_document_number(self, pickings):
+        for picking in pickings:
+            if (
+                picking.picking_type_id.pre_generate_fiscal_document_number
+                == "invoice_wizard"
+            ):
+                picking._generate_document_number()

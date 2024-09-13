@@ -16,6 +16,7 @@ from odoo.exceptions import Warning as ValidationError
 
 from ..constants.br_cobranca import (
     DICT_BRCOBRANCA_CNAB_TYPE,
+    TIMEOUT,
     get_brcobranca_api_url,
     get_brcobranca_bank,
 )
@@ -39,7 +40,7 @@ class PaymentOrder(models.Model):
     def _prepare_remessa_santander(self, remessa_values, cnab_type):
         remessa_values.update(
             {
-                "codigo_carteira": self.payment_mode_id.boleto_wallet_code_id.code,
+                "codigo_carteira": self.payment_mode_id.wallet_code_id.code,
                 "codigo_transmissao": self.payment_mode_id.cnab_company_bank_code,
                 "conta_corrente": misc.punctuation_rm(
                     self.journal_id.bank_account_id.acc_number
@@ -121,9 +122,11 @@ class PaymentOrder(models.Model):
             # Informa se o CNAB especifico de um Banco não está implementado
             # no BRCobranca, evitando a mensagem de erro mais extensa da lib
             raise ValidationError(
-                _("The CNAB {} for Bank {} are not implemented in BRCobranca.").format(
-                    cnab_type,
-                    bank_account_id.bank_id.name,
+                _(
+                    "The CNAB %(cnab_type)s for Bank %(bank_name)s are not implemented "
+                    "in BRCobranca.",
+                    cnab_type=cnab_type,
+                    bank_name=bank_account_id.bank_id.name,
                 )
             )
 
@@ -144,14 +147,13 @@ class PaymentOrder(models.Model):
             "sequencial_remessa": self.file_number,
         }
 
-        try:
-            bank_method = getattr(
-                self, "_prepare_remessa_{}".format(bank_brcobranca.name)
-            )
-            if bank_method:
-                bank_method(remessa_values, cnab_type)
-        except Exception:
-            pass
+        # Casos onde o Banco além dos principais campos possui campos
+        # específicos, dos casos por enquanto mapeados, se estiver vendo
+        # um caso que está faltando por favor considere fazer um
+        # PR para ajudar
+        if hasattr(self, f"_prepare_remessa_{bank_brcobranca.name}"):
+            bank_method = getattr(self, f"_prepare_remessa_{bank_brcobranca.name}")
+            bank_method(remessa_values, cnab_type)
 
         remessa = self._get_brcobranca_remessa(
             bank_brcobranca, remessa_values, cnab_type
@@ -181,6 +183,7 @@ class PaymentOrder(models.Model):
                 "bank": bank_brcobranca.name,
             },
             files=files,
+            timeout=TIMEOUT,
         )
 
         if cnab_type == "240" and "R01" in res.text[242:254]:

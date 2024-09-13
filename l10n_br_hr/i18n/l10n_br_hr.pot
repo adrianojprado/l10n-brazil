@@ -119,6 +119,11 @@ msgid "Alternate Phone"
 msgstr ""
 
 #. module: l10n_br_hr
+#: model:ir.model.fields,field_description:l10n_br_hr.field_hr_employee_dependent__is_anonymous_consumer
+msgid "Anonymous Consumer"
+msgstr ""
+
+#. module: l10n_br_hr
 #: model:ir.model.fields,field_description:l10n_br_hr.field_hr_employee_dependent__inc_trab_inss_file
 msgid "Atestado de incapacidade INSS"
 msgstr ""
@@ -211,6 +216,16 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_hr.field_hr_employee__cnpj_cpf
 #: model:ir.model.fields,field_description:l10n_br_hr.field_hr_employee_dependent__cnpj_cpf
 msgid "CNPJ/CPF"
+msgstr ""
+
+#. module: l10n_br_hr
+#: model:ir.model.fields,field_description:l10n_br_hr.field_hr_employee_dependent__cnpj_cpf_stripped
+msgid "CNPJ/CPF Stripped"
+msgstr ""
+
+#. module: l10n_br_hr
+#: model:ir.model.fields,help:l10n_br_hr.field_hr_employee_dependent__cnpj_cpf_stripped
+msgid "CNPJ/CPF without special characters"
 msgstr ""
 
 #. module: l10n_br_hr
@@ -1021,11 +1036,6 @@ msgstr ""
 #. module: l10n_br_hr
 #: model:ir.model.fields,field_description:l10n_br_hr.field_hr_employee_dependent__invoice_ids
 msgid "Invoices"
-msgstr ""
-
-#. module: l10n_br_hr
-#: model:ir.model.fields,field_description:l10n_br_hr.field_hr_employee_dependent__is_anonymous_consumer
-msgid "Is Anonymous Consumer"
 msgstr ""
 
 #. module: l10n_br_hr

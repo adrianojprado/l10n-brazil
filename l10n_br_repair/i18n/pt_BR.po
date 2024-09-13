@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-28 01:20+0000\n"
-"PO-Revision-Date: 2024-04-25 22:43+0000\n"
+"PO-Revision-Date: 2024-08-28 19:06+0000\n"
 "Last-Translator: Marcel Savegnago <marcel.savegnago@gmail.com>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: l10n_br_repair
 #: model_terms:ir.ui.view,arch_db:l10n_br_repair.report_repair_order
@@ -77,7 +77,7 @@ msgstr "Dados adicionais inseridos manualmente pelo usuário"
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_fee__allow_csll_irpj
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_line__allow_csll_irpj
 msgid "Allow Csll Irpj"
-msgstr ""
+msgstr "Permitir CSLL IRPJ"
 
 #. module: l10n_br_repair
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_order__amount_discount_value
@@ -98,9 +98,6 @@ msgid "Amount Financial"
 msgstr "Total Financeiro"
 
 #. module: l10n_br_repair
-#: model:ir.model.fields,field_description:l10n_br_repair.field_l10n_br_repair_fiscal_line_mixin__financial_total_gross
-#: model:ir.model.fields,field_description:l10n_br_repair.field_repair_fee__financial_total_gross
-#: model:ir.model.fields,field_description:l10n_br_repair.field_repair_line__financial_total_gross
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_order__amount_financial_total_gross
 msgid "Amount Financial Gross"
 msgstr "Total Financeiro Bruto"
@@ -160,9 +157,6 @@ msgid "Amount Untaxed"
 msgstr "Total sem Impostos"
 
 #. module: l10n_br_repair
-#: model:ir.model.fields,help:l10n_br_repair.field_l10n_br_repair_fiscal_line_mixin__price_gross
-#: model:ir.model.fields,help:l10n_br_repair.field_repair_fee__price_gross
-#: model:ir.model.fields,help:l10n_br_repair.field_repair_line__price_gross
 #: model:ir.model.fields,help:l10n_br_repair.field_repair_order__amount_price_gross
 msgid "Amount without discount."
 msgstr "Total sem desconto."
@@ -274,7 +268,7 @@ msgstr "% Redução de RETENÇÃO de COFINS"
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_fee__cofins_wh_base
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_line__cofins_wh_base
 msgid "COFINS RET Base"
-msgstr "Base para COFINS RET"
+msgstr "Base para RET COFINS"
 
 #. module: l10n_br_repair
 #: model:ir.model.fields,field_description:l10n_br_repair.field_l10n_br_repair_fiscal_line_mixin__cofins_wh_value
@@ -605,6 +599,21 @@ msgid "Display Name"
 msgstr "Nome Exibido"
 
 #. module: l10n_br_repair
+#: model:ir.model.fields,field_description:l10n_br_repair.field_repair_order__document_number
+msgid "Document Number"
+msgstr "Número do Documento"
+
+#. module: l10n_br_repair
+#: model:ir.model.fields,field_description:l10n_br_repair.field_repair_order__document_serie_id
+msgid "Document Serie"
+msgstr "Série do Documento"
+
+#. module: l10n_br_repair
+#: model:ir.model.fields,field_description:l10n_br_repair.field_repair_order__document_type_id
+msgid "Document Type"
+msgstr "Tipo de Documento"
+
+#. module: l10n_br_repair
 #: model:ir.model.fields,field_description:l10n_br_repair.field_l10n_br_repair_fiscal_line_mixin__estimate_tax
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_fee__estimate_tax
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_line__estimate_tax
@@ -654,6 +663,13 @@ msgid "Financial Discount Value"
 msgstr "Valor do Desconto Financeiro"
 
 #. module: l10n_br_repair
+#: model:ir.model.fields,field_description:l10n_br_repair.field_l10n_br_repair_fiscal_line_mixin__financial_total_gross
+#: model:ir.model.fields,field_description:l10n_br_repair.field_repair_fee__financial_total_gross
+#: model:ir.model.fields,field_description:l10n_br_repair.field_repair_line__financial_total_gross
+msgid "Financial Gross Amount"
+msgstr "Valor Financeiro Bruto"
+
+#. module: l10n_br_repair
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_order__fiscal_additional_data
 msgid "Fiscal Additional Data"
 msgstr "Dados Adicionais Fiscais"
@@ -671,7 +687,7 @@ msgstr "Contagem de Documentos Fiscais"
 #. module: l10n_br_repair
 #: model:ir.model,name:l10n_br_repair.model_l10n_br_repair_fiscal_line_mixin
 msgid "Fiscal Line Mixin"
-msgstr ""
+msgstr "Mixin de Linha Fiscal"
 
 #. module: l10n_br_repair
 #: model:ir.model.fields,field_description:l10n_br_repair.field_l10n_br_repair_fiscal_line_mixin__fiscal_operation_type
@@ -743,7 +759,7 @@ msgstr "Valor do Frete"
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_fee__price_gross
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_line__price_gross
 msgid "Gross Amount"
-msgstr "Quantidade Bruta"
+msgstr "Total Bruto"
 
 #. module: l10n_br_repair
 #: model:ir.model.fields,field_description:l10n_br_repair.field_l10n_br_repair_fiscal_line_mixin__icms_percent
@@ -1243,7 +1259,7 @@ msgstr "% Redução do IRPJ RET"
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_fee__irpj_wh_base
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_line__irpj_wh_base
 msgid "IRPJ RET Base"
-msgstr ""
+msgstr "Base do IRPJ RET"
 
 #. module: l10n_br_repair
 #: model:ir.model.fields,field_description:l10n_br_repair.field_l10n_br_repair_fiscal_line_mixin__irpj_wh_value
@@ -1434,6 +1450,11 @@ msgstr "Contagem de fatura"
 #: model_terms:ir.ui.view,arch_db:l10n_br_repair.repair_order_form_view
 msgid "Invoices"
 msgstr "Faturas"
+
+#. module: l10n_br_repair
+#: model:ir.model.fields,field_description:l10n_br_repair.field_repair_order__document_key
+msgid "Key"
+msgstr "Chave"
 
 #. module: l10n_br_repair
 #: model:ir.model.fields,field_description:l10n_br_repair.field_l10n_br_repair_fiscal_line_mixin____last_update
@@ -1723,13 +1744,13 @@ msgstr "Linha de Pedido do Parceiro (nItemPed)"
 #: code:addons/l10n_br_repair/models/repair_order.py:0
 #, python-format
 msgid "Please define an accounting sales journal for the company {} ({})."
-msgstr ""
+msgstr "Defina um diário de vendas contábeis para a empresa {} ({})."
 
 #. module: l10n_br_repair
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_fee__price_subtotal
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_line__price_subtotal
 msgid "Price Subtotal"
-msgstr ""
+msgstr "Subtotal de preço"
 
 #. module: l10n_br_repair
 #: model:ir.model.fields,field_description:l10n_br_repair.field_l10n_br_repair_fiscal_line_mixin__price_total
@@ -1779,6 +1800,11 @@ msgstr "Linha de Reparo (peças)"
 #: model:ir.model,name:l10n_br_repair.model_repair_order
 msgid "Repair Order"
 msgstr "Ordem de Reparo"
+
+#. module: l10n_br_repair
+#: model:ir.model.fields,field_description:l10n_br_repair.field_repair_order__document_serie
+msgid "Serie Number"
+msgstr "Número de Série"
 
 #. module: l10n_br_repair
 #: model:ir.model.fields,field_description:l10n_br_repair.field_l10n_br_repair_fiscal_line_mixin__service_type_id
@@ -1984,7 +2010,7 @@ msgstr "UoM Fiscal"
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_line__amount_tax_withholding
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_order__amount_tax_withholding
 msgid "Tax Withholding"
-msgstr ""
+msgstr "Imposto Retido"
 
 #. module: l10n_br_repair
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_order__amount_tax
@@ -1999,6 +2025,24 @@ msgstr "Impostos"
 #: model:ir.model.fields,field_description:l10n_br_repair.field_repair_order__amount_total
 msgid "Total"
 msgstr "Total"
+
+#. module: l10n_br_repair
+#: model:ir.model.fields,help:l10n_br_repair.field_l10n_br_repair_fiscal_line_mixin__financial_total_gross
+#: model:ir.model.fields,help:l10n_br_repair.field_repair_fee__financial_total_gross
+#: model:ir.model.fields,help:l10n_br_repair.field_repair_line__financial_total_gross
+msgid "Total amount before any discounts are applied."
+msgstr "Valor total antes de quaisquer descontos serem aplicados."
+
+#. module: l10n_br_repair
+#: model:ir.model.fields,help:l10n_br_repair.field_l10n_br_repair_fiscal_line_mixin__price_gross
+#: model:ir.model.fields,help:l10n_br_repair.field_repair_fee__price_gross
+#: model:ir.model.fields,help:l10n_br_repair.field_repair_line__price_gross
+msgid ""
+"Total value of products or services (quantity x unit price)before any "
+"discounts."
+msgstr ""
+"Valor total dos produtos ou serviços (quantidade x preço unitário) antes de "
+"quaisquer descontos."
 
 #. module: l10n_br_repair
 #: model:ir.model.fields,field_description:l10n_br_repair.field_l10n_br_repair_fiscal_line_mixin__uom_id
@@ -2028,7 +2072,7 @@ msgstr "Usado em documentos fiscais"
 #: model:ir.model.fields,help:l10n_br_repair.field_repair_fee__icms_substitute
 #: model:ir.model.fields,help:l10n_br_repair.field_repair_line__icms_substitute
 msgid "Valor do ICMS Próprio do Substituto cobrado em operação anterior"
-msgstr ""
+msgstr "Valor do ICMS Próprio do Substituto cobrado em operação anterior"
 
 #. module: l10n_br_repair
 #: code:addons/l10n_br_repair/models/repair_order.py:0
